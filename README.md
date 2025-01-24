@@ -139,6 +139,67 @@
 <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp • Password: your_secure_password</p>
 <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp • Database Name: your_database_name</p>
 
+<h3> 3) JDBC URL:  </h3>
+
+<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp • The JDBC URL is the connection string used by the Spring Boot application to connect to the MySQL database. </p>
+<p>Example:</p>
+
+```
+jdbc:mysql://localhost:3306/your_database_name?useSSL=false&serverTimezone=UTC
+```
+<h3> 4) Connection Pooling:  </h3>
+<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp • HikariCP (default in Spring Boot) is used for database connection pooling. </p>
+<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp • Configuration in application.properties or application.yml</p>
+
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name?useSSL=false&serverTimezone=UTC
+spring.datasource.username=your_database_user
+spring.datasource.password=your_secure_password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.hikari.maximum-pool-size=10
+spring.datasource.hikari.idle-timeout=30000
+spring.datasource.hikari.connection-timeout=30000
+```
+
+<h3> 5) SSL/TLS Configuration:  </h3>
+<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp • If SSL is enabled for secure communication, you may need additional parameters. Example:</p>
+
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name?useSSL=true&requireSSL=true&serverTimezone=UTC
+```
+
+<h3> 6) Database Configuration in application.properties:  </h3>
+<p>Here's an example configuration for connecting to MySQL with Spring Boot:</p>
+
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/recruiters_gear?useSSL=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=your_password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.initialization-mode=always
+```
+
+<h3> 7) Database Connection Testing:  </h3>
+<p>You can test the database connection through a simple test class in Spring Boot:</p>
+
+```
+@SpringBootTest
+public class DatabaseConnectionTest {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Test
+    public void testConnection() throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            assertNotNull(connection);
+        }
+    }
+}
+```
+
 
 
 
