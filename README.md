@@ -200,6 +200,19 @@ public class DatabaseConnectionTest {
 }
 ```
 
+<h2> 📊 Data Types and Constraints Used in MySQL:  </h2>
+<h3> 1)📝 Tabular Format (Recommended):   </h3>
+<p>To provide a clear overview of the database schema, a tabular format is used to detail the columns, their data types, constraints, and descriptions for each table in the database. This structure helps developers quickly understand the database design and relationships between tables.</p>
+
+### Table: `employee`
+| Column Name      | Data Type       | Constraints                  | Default Value      | Description                  |
+|-------------------|-----------------|------------------------------|--------------------|------------------------------|
+| emp_id           | INT             | PRIMARY KEY, AUTO_INCREMENT | -                  | Unique identifier for employees |
+| name             | VARCHAR(255)    | NOT NULL                    | -                  | Full name of the employee    |
+| date_of_joining  | DATE            | -                           | CURRENT_DATE       | Date when the employee joined |
+| address          | TEXT            | -                           | NULL               | Residential address          |
+| dept_id          | INT             | FOREIGN KEY (`dept_id`) REFERENCES `department(dept_id)` | - | Links employee to their department |
+
 
 
 
